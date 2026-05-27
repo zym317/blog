@@ -53,21 +53,21 @@ if (postContent) {
   const el = document.querySelector('.hero h1');
   if (!el || !el.textContent) return;
 
-  const text = el.textContent.trim();
+  const chars = [...el.textContent.trim()];
   el.textContent = '';
   const cursor = document.createElement('span');
   cursor.className = 'typewriter-cursor';
   cursor.textContent = '|';
-  el.parentElement.appendChild(cursor);
 
   let i = 0;
   const timer = setInterval(() => {
-    if (i < text.length) {
-      el.textContent += text[i];
+    if (i < chars.length) {
+      el.textContent += chars[i];
+      el.appendChild(cursor);
       i++;
     } else {
       clearInterval(timer);
-      setTimeout(() => { cursor.style.display = 'none'; }, 3000);
+      setTimeout(() => { cursor.remove(); }, 3000);
     }
   }, 100);
 })();
